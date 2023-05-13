@@ -1,4 +1,6 @@
 const _ = require('lodash');
+const config = require('config');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
@@ -27,7 +29,9 @@ router.post('/', async (req, res) => {
     //     email: user.email
     // });
 
-    res.send(_.pick(user, ['_id', 'name', 'email']));
+    // user reg unama automa log karanna.
+    const token = jwt.sign({ _id: user._id }, config.get('jwtPrivateKey'));
+    res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
 });
 
 module.exports = router;
