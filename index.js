@@ -1,4 +1,6 @@
+require('express-async-errors');
 const Joi = require('joi');
+const error = require('./middleware/error');
 Joi.objectId = require('joi-objectid')(Joi); // meka metana index file eke dammama one tanaka aya define nokara use karanna puluwan.
 const express = require('express');
 const mongoose = require('mongoose');
@@ -32,6 +34,8 @@ app.use('/api/rental', rental);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/', home);
+
+app.use(error);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`listening on port ${port}...`));
