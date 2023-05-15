@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
         maxlength: 1024,
     },
     isAdmin: Boolean
+    //multiple roles tynawanama role: [] wage danna puluwan
 });
 
 userSchema.methods.generateAuthToken = function() {
